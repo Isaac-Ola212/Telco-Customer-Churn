@@ -69,6 +69,29 @@ def show_data_overview(df):
         with col3:
             st.metric("Features", len(df.columns))
 
+        # Additional distribution charts
+        st.subheader("Feature Distributions")
+
+        # Numerical features
+        numerical_cols = ['tenure', 'MonthlyCharges', 'TotalCharges']
+        for col in numerical_cols:
+            if col in df.columns:
+                st.subheader(f"Distribution of {col}")
+                st.bar_chart(df[col].value_counts(bins=20))
+
+        # Categorical features relevant to churn
+        categorical_cols = ['Contract', 'PaymentMethod', 'InternetService']
+        for col in categorical_cols:
+            if col in df.columns:
+                st.subheader(f"Churn by {col}")
+                churn_by_cat = df.groupby([col, 'Churn']).size().unstack().fillna(0)
+                st.bar_chart(churn_by_cat)
+
+        # Tenure vs Churn
+        st.subheader("Tenure Distribution by Churn")
+        tenure_churn = df.groupby(['tenure', 'Churn']).size().unstack().fillna(0)
+        st.line_chart(tenure_churn)
+
 def show_prediction_page(ml_model, scaler, df):
     """Display prediction page"""
     st.header("🔮 Make Prediction")
@@ -93,27 +116,59 @@ def show_prediction_page(ml_model, scaler, df):
     # Make prediction button
     if st.button("🔍 Predict Churn Risk", type="primary"):
         try:
-            # Prepare input data - this needs to match the training data structure
-            # For now, we'll use a simplified approach
-            input_data = pd.DataFrame({
-                'tenure': [tenure],
-                'MonthlyCharges': [monthly_charges],
-                'TotalCharges': [total_charges],
-                'Contract': [contract]
-            })
+            # Get the feature columns from the dataset (excluding target if present)
+            feature_cols = [col for col in df.columns if col != 'Churn']
 
-            # One-hot encode categorical variables to match training data
+            # Create a full input DataFrame with default values
+            input_data = pd.DataFrame(index=[0], columns=feature_cols)
+            input_data = input_data.fillna(0)  # Fill numerical with 0, categorical with appropriate defaults
+
+            # Set default values for categorical features (assuming 'No' or most common)
+            categorical_defaults = {
+                'gender': 'Female',
+                'Partner': 'No',
+                'Dependents': 'No',
+                'PhoneService': 'Yes',
+                'MultipleLines': 'No',
+                'InternetService': 'DSL',
+                'OnlineSecurity': 'No',
+                'OnlineBackup': 'No',
+                'DeviceProtection': 'No',
+                'TechSupport': 'No',
+                'StreamingTV': 'No',
+                'StreamingMovies': 'No',
+                'Contract': 'Month-to-month',
+                'PaperlessBilling': 'Yes',
+                'PaymentMethod': 'Electronic check',
+                'SeniorCitizen': 0
+            }
+            for col, default in categorical_defaults.items():
+                if col in input_data.columns:
+                    input_data[col] = default
+
+            # Update with user inputs
+            input_data['tenure'] = tenure
+            input_data['MonthlyCharges'] = monthly_charges
+            input_data['TotalCharges'] = total_charges
+            input_data['Contract'] = contract
+
+            # One-hot encode the input data to match training
             input_encoded = pd.get_dummies(input_data, drop_first=True)
 
-            # Ensure all expected columns are present (add missing ones with 0)
-            expected_features = ['tenure', 'MonthlyCharges', 'TotalCharges',
-                               'Contract_One year', 'Contract_Two year']
+            # Get the expected features from the scaler (assuming scaler was fitted on encoded data)
+            # If not, this might need adjustment; for now, assume scaler's feature_names_in_ if available
+            if hasattr(scaler, 'feature_names_in_'):
+                expected_features = list(scaler.feature_names_in_)
+            else:
+                # Fallback: assume based on common encoding; adjust as needed
+                expected_features = input_encoded.columns.tolist()
 
+            # Ensure all expected columns are present
             for col in expected_features:
                 if col not in input_encoded.columns:
                     input_encoded[col] = 0
 
-            # Reorder columns to match training data
+            # Reorder to match expected
             input_encoded = input_encoded[expected_features]
 
             # Scale the input
