@@ -1,72 +1,125 @@
+# **Telco Customers Churn**
+
+# Project Overview  
+This project analyses customer data from a telecommunications company to identify key factors driving customer churn and to build a machine learning model capable of predicting churn.
+
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+  
+## Dataset Content
+* Telco Customer Churn Dataset
+Source: IBM Sample Dataset (Kaggle)
 
-## Template Instructions
+The dataset contains approximately 7,000 customer records with features including:
 
-Welcome,
+- Demographics
+- Contract information
+- Services subscribed
+- Monthly charges
+- Tenure
+- Target variable: Churn
 
-This is the Code Institute student template for the Data Analytics capstone project. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+## Business Requirements
+* The goal of this project is to analyse telecom customer data to understand the key factors that influence customer churn and develop a predictive model that identifies customers at risk of leaving the service.
 
-## How to use this repo
+- The specific business requirements are:
+- Identify the main factors that contribute to customer churn.
+- Analyse customer behaviour patterns related to contract type, tenure, and monthly charges.
+- Develop a machine learning model capable of predicting customer churn.
+- Present actionable insights through visualisations and dashboards to support business decision-making.
+- Provide an interactive dashboard that allows stakeholders to explore churn patterns.
 
-1. Use this template to create your GitHub project repo. Click the **Use this template** button, then click **Create a new repository**.
+## Hypothesis and how to validate?
+* Hypothesis 1
 
-1. Copy the URL of your repository to your clipboard.
+Customers with month-to-month contracts are more likely to churn than customers with long-term contracts.
 
-1. In VS Code, select **File** -> **Open Folder**.
+Validation Method:
+A Chi-Square test of independence will be performed to determine whether there is a statistically significant relationship between contract type and churn.
 
-1. Select your `vscode-projects` folder, then click the **Select Folder** button on Windows, or the **Open** button on Mac.
+* Hypothesis 2
 
-1. From the top menu in VS Code, select **Terminal** > **New Terminal** to open the terminal.
+Customers with shorter tenure are more likely to churn than long-term customers.
 
-1. In the terminal, type `git clone` followed by the URL of your GitHub repository. Then hit **Enter**. This command will download all the files in your GitHub repository into your vscode-projects folder.
+Validation Method:
+An Independent T-Test will compare the average tenure between churned and retained customers.
 
-1. In VS Code, select **File** > **Open Folder** again.
+* Hypothesis 3
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click **Select Folder**.
+Customers with higher monthly charges are more likely to churn.
 
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate from each other. You need to create your virtual environment, also called a venv, and then ensure that it is activated any time you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select **Command Palette** to open the VS Code command palette.
+Validation Method:
+A T-Test will compare the monthly charges between churned and non-churned customers.
 
-1. In the command palette, type: *create environment* and select **Python: Create Environment…**
+## Project Plan
+*The project followed a structured data analytics workflow consisting of:
 
-1. Choose **Venv** from the dropdown list.
++ Data Collection – The Telco Customer Churn dataset was sourced from a publicly available dataset.
++ Data Cleaning and Transformation – The data was cleaned, formatted, and prepared for analysis.
++ Exploratory Data Analysis – The dataset was analysed to identify patterns and relationships.
++ Data Visualisation – Graphical representations were created to communicate insights clearly.
++ Statistical Testing – Hypothesis testing was performed to validate findings.
++ Machine Learning – Predictive models were developed to forecast churn.
++ Dashboard Development – A visual dashboard was created for stakeholders.
+  
+*  Data Management 
+Data was managed through the following stages:
 
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
++ Collection - The dataset was downloaded and stored in the project’s dataset/raw folder.
++ Processing - Data cleaning and transformations were performed in the ETL notebook. Missing values and incorrect data types were addressed.
++ Analysis -The cleaned dataset was analysed through exploratory data analysis and statistical testing.
++ Interpretation - Insights derived from analysis were visualised using charts and dashboards.
++ The cleaned dataset was stored in dataset/processed/cleaned_telco.csv to ensure reproducibility.
+  
+* Research methodologies used
+  The following methodologies were used:
 
-1. **DO NOT** click the box next to `requirements.txt`, as you need to do more steps before you can install your dependencies. Click **OK**.
+- Exploratory Data Analysis (EDA) to understand the dataset structure and patterns.
+- Statistical hypothesis testing to validate observed relationships.
+- Machine learning classification models to predict churn outcomes.
 
-1. You will see a `.venv` folder appear in the file explorer pane to show that the virtual environment has been created.
+These methodologies were selected because they provide both descriptive and predictive insights, which are valuable for business decision-making.
 
-1. **Important**: Note that the `.venv` folder is in the `.gitignore` file so that Git won't track it.
+## The rationale to map the business requirements to the Data Visualisations
+* List your business requirements and a rationale to map them to the Data Visualisations
 
-1. Return to the terminal by clicking on the TERMINAL tab, or click on the **Terminal** menu and choose **New Terminal** if no terminal is currently open.
+## Analysis techniques used
 
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
+The following techniques were used:
 
- ```console
- pip3 install -r requirements.txt
- ```
++ Exploratory Data Analysis - Used to understand the structure and patterns in the dataset.
++ Data Visualisation - Used to identify relationships between features and churn behaviour.
++ Statistical Testing - Chi-Square tests and T-tests were used to validate whether observed relationships were statistically significant.
++ Machine Learning - Classification models were used to predict customer churn.
+  
+* The data analysis was structured in the following order:
 
-1. Open the `jupyter_notebooks` directory, and click on the notebook you want to open.
+- Data cleaning and transformation
+- Exploratory analysis
+- Visualisation of patterns
+- Statistical validation
+- Predictive modelling
 
-1. Click the **kernel** button and choose **Python Environments**.
+This structure ensures that insights are validated before building predictive models.
 
-Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it will be Python-3.12.8 if that is what is installed on your PC. To confirm this, you can use the command below in a notebook code cell.
+* Data Limitations
+  Some limitations of the dataset include:
+- Limited behavioural variables
+- Potential imbalance in churn classes
 
-```console
-! python --version
-```
-
-## Deployment Reminders
-
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version that closest matches what you used in this project.
-* The project can be deployed to Heroku using the following steps.
-
-1. Log in to Heroku and create an App
-2. At the **Deploy** tab, select **GitHub** as the deployment method.
-3. Select your repository name and click **Search**. Once it is found, click **Connect**.
-4. Select the branch you want to deploy, then click **Deploy Branch**.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+Alternative approaches could include:
+- Random Forest or Gradient Boosting models
+- Feature selection techniques
+- Cross-validation for improved model robustness
+  
+* Generative AI Usage
+  Generative AI tools were used to assist with:
+- Project planning and ideation
+- Code optimisation
+- Debugging Python scripts
+- Structuring documentation
+  
+## Ethical considerations
+* Data Privacy - The dataset used is publicly available and contains no personally identifiable information.
+* Bias and Fairness - Potential bias may exist in customer demographics or service usage patterns. Care was taken to avoid making discriminatory assumptions based on the data.
+  

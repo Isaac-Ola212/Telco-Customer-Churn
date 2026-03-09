@@ -73,14 +73,14 @@ def show_data_overview(df):
         st.subheader("Feature Distributions")
 
         # Numerical features
-        numerical_cols = ['tenure', 'MonthlyCharges', 'TotalCharges']
+        numerical_cols = ['MonthlyCharges', 'TotalCharges']
         for col in numerical_cols:
             if col in df.columns:
                 st.subheader(f"Distribution of {col}")
                 st.bar_chart(df[col].value_counts(bins=20))
 
         # Categorical features relevant to churn
-        categorical_cols = ['Contract', 'PaymentMethod', 'InternetService']
+        categorical_cols = ['Contract', 'PaymentMethod', 'InternetService', 'tenure_group']
         for col in categorical_cols:
             if col in df.columns:
                 st.subheader(f"Churn by {col}")
@@ -88,9 +88,9 @@ def show_data_overview(df):
                 st.bar_chart(churn_by_cat)
 
         # Tenure vs Churn
-        st.subheader("Tenure Distribution by Churn")
-        tenure_churn = df.groupby(['tenure', 'Churn']).size().unstack().fillna(0)
-        st.line_chart(tenure_churn)
+        st.subheader("Churn by Tenure Group")
+        tenure_churn = df.groupby(['tenure_group', 'Churn']).size().unstack().fillna(0)
+        st.bar_chart(tenure_churn)
 
 def show_prediction_page(ml_model, scaler, df):
     """Display prediction page"""
