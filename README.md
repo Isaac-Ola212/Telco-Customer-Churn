@@ -160,7 +160,6 @@ During development, the tenure column was replaced with the tenure_group feature
 
 A minor limitation is that Streamlit’s built-in charts (st.bar_chart, st.line_chart) provide limited customisation compared to advanced libraries such as Plotly.
 
-## Development Roadmap
 ### Challenges
 * Aligning model input features with dashboard inputs.
 * Creating clear visualisations from raw dataset features.
