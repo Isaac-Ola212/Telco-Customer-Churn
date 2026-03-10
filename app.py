@@ -99,18 +99,35 @@ def show_data_overview(df):
             df[['tenure','MonthlyCharges','TotalCharges']].describe()
         )
 
+        import matplotlib.pyplot as plt
+
         # Additional distribution charts
         st.subheader("Feature Distributions")
 
         # Numerical features
         numerical_cols = ['MonthlyCharges', 'TotalCharges']
+
         for col in numerical_cols:
             if col in df.columns:
                 st.subheader(f"Distribution of {col}")
-                st.bar_chart(df[col].value_counts(bins=20))
+
+                fig, ax = plt.subplots()
+
+                ax.hist(df[col], bins=20)
+
+                # Proper axis labels
+                if col == "MonthlyCharges":
+                    ax.set_xlabel("Monthly Charges ($)")
+                elif col == "TotalCharges":
+                    ax.set_xlabel("Total Charges ($)")
+
+                ax.set_ylabel("Number of Customers")
+                ax.set_title(f"Distribution of {col}")
+
+                st.pyplot(fig)
 
         # Categorical features relevant to churn
-        categorical_cols = ['Contract', 'PaymentMethod', 'InternetService', 'tenure_group']
+        categorical_cols = ['Contract', 'PaymentMethod', 'InternetService']
         for col in categorical_cols:
             if col in df.columns:
                 st.subheader(f"Churn by {col}")
