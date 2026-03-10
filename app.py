@@ -69,6 +69,36 @@ def show_data_overview(df):
         with col3:
             st.metric("Features", len(df.columns))
 
+        # Display summary statistics 
+        st.subheader("📊 Statistical Summary")
+
+        col4, col5, col6 = st.columns(3)
+
+        with col4:
+            st.metric("Mean Monthly Charges", round(df["MonthlyCharges"].mean(), 2))
+
+        with col5:
+            st.metric("Median Monthly Charges", round(df["MonthlyCharges"].median(), 2))
+
+        with col6:
+            st.metric("Std Dev Monthly Charges", round(df["MonthlyCharges"].std(), 2))
+
+
+        col7, col8 = st.columns(2)
+
+        with col7:
+            st.metric("Variance Monthly Charges", round(df["MonthlyCharges"].var(), 2))
+
+        with col8:
+            st.metric("Average Tenure", round(df["tenure"].mean(), 1))
+
+
+        st.subheader("Detailed Statistical Table")
+
+        st.dataframe(
+            df[['tenure','MonthlyCharges','TotalCharges']].describe()
+        )
+
         # Additional distribution charts
         st.subheader("Feature Distributions")
 
