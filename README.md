@@ -175,15 +175,6 @@ A minor limitation is that Streamlit’s built-in charts (st.bar_chart, st.line_
 ## Deployment
 The application is deployed using Heroku.
 
-Live link: https://telco_Customer_Churn.herokuapp.com/
-
-Deployment steps:
-* Create a Heroku application.
-* Connect the GitHub repository.
-* Select the deployment branch.
-* Deploy the branch.
-* Open the deployed app.
-
 ## Main Data Analysis Libraries
 * Pandas – data loading and manipulation
 Example:
