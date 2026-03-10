@@ -118,37 +118,6 @@ Alternative approaches could include:
 ## Ethical considerations
 * Data Privacy - The dataset used is publicly available and contains no personally identifiable information.
 * Bias and Fairness - Potential bias may exist in customer demographics or service usage patterns. Care was taken to avoid making discriminatory assumptions based on the data.
-  
-  ## Data Structre
-  
-  Telco-Customer-Churn-Project/
-│
-├── app.py                        # Main Streamlit application
-├── requirements.txt              # Project dependencies
-├── runtime.txt                   # Python version for Heroku deployment
-├── Procfile                       # Heroku deployment configuration
-├── README.md                      # Project documentation
-│
-├── dataset/
-│   ├── raw/
-│   │   └── Telco-Customer-Churn.csv     # Original dataset
-│   └── processed/
-│       └── Telco-Customer-Churn-Cleaned.csv  # Cleaned dataset for analysis
-│
-├── model/
-│   ├── churn_model.pkl            # Trained machine learning model
-│   └── scaler.pkl                 # Feature scaler for prediction
-│
-├── Research/
-│   ├── ETL.ipynb                  # Notebook for data extraction, transformation, loading
-│   ├── EDA.ipynb                  # Notebook for exploratory data analysis
-│   ├── Data_Visualisations.ipynb  # Notebook for building charts and plots
-│   └── ML.ipynb                   # Notebook for machine learning and predictive modelling
-│
-├── dashboard_assets/              # Optional folder for images or logos used in dashboard
-│   └── logo.png
-│
-└── .gitignore                     # Git ignore file
 
   ## Dashboard Design
   The dashboard was developed using Streamlit and structured into multiple pages to provide both data exploration and predictive functionality. The interface was designed to be simple, interactive, and accessible to both technical and non-technical users.
