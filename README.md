@@ -83,10 +83,12 @@ These methodologies were selected because they provide both descriptive and pred
 
 The following techniques were used:
 
-+ Exploratory Data Analysis - Used to understand the structure and patterns in the dataset.
-+ Data Visualisation - Used to identify relationships between features and churn behaviour.
-+ Statistical Testing - Chi-Square tests and T-tests were used to validate whether observed relationships were statistically significant.
-+ Machine Learning - Classification models were used to predict customer churn.
+- Descriptive Statistics
+- Correlation Analysis
+- Chi-Square Test
+- Independent Samples T-Test
+- Logistic Regression
+- Random Forest (comparison model)
   
 * The data analysis was structured in the following order:
 
@@ -120,56 +122,59 @@ Alternative approaches could include:
 * Bias and Fairness - Potential bias may exist in customer demographics or service usage patterns. Care was taken to avoid making discriminatory assumptions based on the data.
 
   ## Dashboard Design
-  The dashboard was developed using Streamlit and structured into multiple pages to provide both data exploration and predictive functionality. The interface was designed to be simple, interactive, and accessible to both technical and non-technical users.
+* The dashboard was designed to:
+* Support both technical and non-technical stakeholders.
+* Present clear business insights.
+* Enable interactive filtering.
+* Provide consistent navigation.
+* Translate analytical findings into actionable recommendations.
 
-  ### Dashboard Pages
-1. Home Page
-Purpose: Provide an overview of the project.
-Content includes:
+  ### Dashboard Pages 
 
-* Project overview and description.
-* Navigation sidebar.
+The final dashboard was developed entirely in Microsoft Power BI.
 
-2. Data Overview Page
-Purpose: Allow users to explore the dataset and understand customer churn patterns.
-Content includes:
+The dashboard is designed for business stakeholders and enables interactive exploration of customer churn patterns.
 
-Dataset preview (st.dataframe)
-* Churn distribution chart
-* KPI metrics (Total records, Churn rate, Number of features)
+Dashboard Pages
+Page 1 – Executive Overview
 
-Feature distribution charts for:
-* Monthly charges
-* Total charges
+Provides a high-level summary including:
+* Total Customers
+* Churn Rate
+* Average Tenure
+* Average Monthly Charges
+* Customer Churn Distribution
 
-Categorical churn analysis for:
-* Contract
-* Payment method
-* Internet service
-* Tenure group
+![alt text](Dashboards/Images/executive_overview.PNG)
 
-3. Prediction Page
-Purpose: Allow users to predict the churn risk of a customer using the trained machine learning model.
-Content includes:
+Page 2 – Contract Analysis
 
-* Customer input form (tenure, monthly charges, total charges, contract type)
-* Predict churn button
-* Prediction result showing churn risk and probability.
+Explores the relationship between contract type and customer churn. 
+Visualisations include:
+
+* Customer Churn by Contract Type
+
+![alt text](Dashboards/Images/contract-type.PNG)
+
+Page 3 – Tenure Analysis
+
+Investigates how customer tenure influences churn.
+Visualisations include:
+
+Customer Churn Across Tenure Groups
+
+![alt text](Dashboards/Images/tenure.PNG)
+
+Page 4 – Monthly Charges Analysis
+
+Examines the relationship between monthly charges and customer churn.
+Visualisations include:
+
+Average Monthly Charges by Churn Status
+
+![alt text](Dashboards/Images/monthly_charges.PNG)
 
 During development, the tenure column was replaced with the tenure_group feature in visualisations because grouped tenure ranges provide clearer and more interpretable insights for users.
-
-A minor limitation is that Streamlit’s built-in charts (st.bar_chart, st.line_chart) provide limited customisation compared to advanced libraries such as Plotly.
-
-### Challenges
-* Aligning model input features with dashboard inputs.
-* Creating clear visualisations from raw dataset features.
-
-### Strategies
-* Using feature encoding to match model inputs.
-* Using tenure_group instead of raw tenure values.
-
-## Deployment
-The application is deployed using Heroku.
 
 ## Main Data Analysis Libraries
 * Pandas – data loading and manipulation
@@ -178,19 +183,21 @@ df = pd.read_csv("Telco-Customer-Churn-Cleaned.csv")
 * NumPy – numerical operations.
 * Scikit-learn – machine learning model training and scaling.
 * Joblib – loading the trained model and scaler.
-* Streamlit – building the interactive dashboard.
+* Power BI – building the interactive dashboard.
 
 ## Learning Journey
 
 This project has given me a hands-on experience in building a complete data science project from data analysis, to developing a machine learning model, and deploying a dashboard - the entire workflow basically. In this journey, i've consolidated my knowledge on cleaning data (the ETL process) and getting it ready for analysis, feature engineering, and model evaluation using Python libraries such as Pandas and Scikit-learn. I have also strenthened my skills in data and statistical analysis and visualisations, upon which i can obtain insights that that can be shared with diverse stakeholders.
 
-One important part of the project was building an interactive dashboard using Streamlit and connecting the trained model to a simple interface where users can enter customer information and receive churn predictions. I also learned more about organising a project for deployment, including managing datasets, model files, and configuration files like requirements.txt, Procfile, and runtime.txt. The project has given me the confidence to build a professional project, while also highlighting the importance of presenting technical insights in a clear and accessible way for both technical and non-technical audiences.
+Developing the Power BI dashboard enhanced my ability to communicate analytical findings to non-technical stakeholders through interactive visualisations and business-focused storytelling. The project also reinforced the importance of selecting appropriate analytical techniques, validating findings statistically, and translating technical results into actionable business recommendations.
+The original Streamlit deployment experienced technical issues, making the dashboard inaccessibie. To ensure reliable access and improve stakeholder usability, interactive dashboards were developed using Power Bl.
 
 ## Credits
 * Dataset from the IBM Telco Customer Churn dataset
 * Documentation from Pandas, Scikit-learn, Streamlit
 * LMS
-* Generative AI (Github Copilot, ChatGPT)
+* Generative AI (Copilot, ChatGPT)
+* Github 
 
 ## Acknowledgements 
 Many thanks to Vasi, Mark and my colleagues who have been instrumental to the successful completion of this project
