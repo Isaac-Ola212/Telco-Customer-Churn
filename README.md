@@ -61,7 +61,7 @@ A T-Test will compare the monthly charges between churned and non-churned custom
 + Machine Learning – Predictive models were developed to forecast churn.
 + Dashboard Development – A visual dashboard was created for stakeholders.
   
-*  Data Management 
+##  Data Management 
 Data was managed through the following stages:
 
 + Collection - The dataset was downloaded and stored in the project’s dataset/raw folder.
@@ -70,7 +70,7 @@ Data was managed through the following stages:
 + Interpretation - Insights derived from analysis were visualised using charts and dashboards.
 + The cleaned dataset was stored in dataset/processed/cleaned_telco.csv to ensure reproducibility.
   
-* Research methodologies used
+## Research methodologies used
   The following methodologies were used:
 
 - Exploratory Data Analysis (EDA) to understand the dataset structure and patterns.
@@ -90,9 +90,10 @@ The following techniques were used:
 - Logistic Regression
 - Random Forest (comparison model)
   
-* The data analysis was structured in the following order:
+## Data Analysis Structure 
+The data analysis was structured in the following order:
 
-- Data cleaning and transformation
+- ETL (Data cleaning and transformation)
 - Exploratory analysis
 - Visualisation of patterns
 - Statistical validation
@@ -100,7 +101,7 @@ The following techniques were used:
 
 This structure ensures that insights are validated before building predictive models.
 
-* Data Limitations
+## Data Limitations
   Some limitations of the dataset include:
 - Limited behavioural variables
 - Potential imbalance in churn classes
@@ -110,7 +111,7 @@ Alternative approaches could include:
 - Feature selection techniques
 - Cross-validation for improved model robustness
   
-* Generative AI Usage
+## Generative AI Usage
   Generative AI tools were used to assist with:
 - Project planning and ideation
 - Code optimisation
@@ -135,7 +136,6 @@ The final dashboard was developed entirely in Microsoft Power BI.
 
 The dashboard is designed for business stakeholders and enables interactive exploration of customer churn patterns.
 
-Dashboard Pages
 Page 1 – Executive Overview
 
 Provides a high-level summary including:
